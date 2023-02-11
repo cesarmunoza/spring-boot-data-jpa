@@ -28,7 +28,7 @@ public class ClienteController {
 	public String crear(Map<String, Object> model) {
 		Cliente cliente = new Cliente();
 		model.put("cliente", cliente);
-		model.put("titulo", "Formulartio del cliente");
+		model.put("titulo", "Formulario del cliente");
 		return "form";
 	}
 	
