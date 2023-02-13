@@ -26,4 +26,11 @@ public class ClienteDaoImpl implements IClienteDao {
 		
 	}
 
+	@Override
+	@Transactional
+	public void save(Cliente cliente) {
+		em.persist(cliente);
+		
+	}
+
 }
