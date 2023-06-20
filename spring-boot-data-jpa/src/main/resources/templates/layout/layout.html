@@ -1,60 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8"/>
-<title th:text="${titulo}">Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<head th:fragment="head">
+<meta charset="UTF-8" />
+<title th:text="'Spring Boot: MVC + Thymeleaf +Data JPA'+${titulo}"></title>
+<link
+	th:href="@{/css/bootstrap.min.css}"
+	rel="stylesheet">
+	<script>
+  function miFunc() {
+    return confirm('Seguro que quieres eliminar este cliente?');
+  }
+</script>
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Spring boot</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/listar}">Clientes</a>
-        </li>        
-      </ul>
-    </div>
-  </div>
-</nav>
-<div class="container">
-	<h1 class="text-secondary border border-success border-top-0 border-left-0 border-right-0" th:text="${titulo}"></h1>
-	<p><a th:href="@{/form}" class="btn btn-default btn-xs">crear cliente</a></p>
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>id</th>
-				<th>nombre</th>
-				<th>apellido</th>
-				<th>Email</th>
-				<th>fecha</th>
-				<th>editar</th>
-				<th>eliminar</th>
-			</tr>
-		</thead>
-		<tbody>
-		<tr th:each="cliente: ${clientes}">
-		<td th:text="${cliente.id}"></td>
-		<td th:text="${cliente.nombre}"></td>
-		<td th:text="${cliente.apellido}"></td>
-		<td th:text="${cliente.email}"></td>
-		<td th:text="${cliente.createAt}"></td>
-		<td><a class="btn btn-primary btn-xs" th:href="@{/form/} + ${cliente.id}" th:text="'editar'"></a></td>
-		<td><a class="btn btn-danger btn-xs" th:href="@{/eliminar/} + ${cliente.id}" th:text="'eliminar'" onClick="confirm('Estás seguro que quieres eliminar?');"></a></td>
-		</tr>
-		</tbody>
-	</table>
-	</div>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" ></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" ></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" ></script>
+
+	<header th:fragment="header">
+		<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">Spring boot</a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarNav"
+					aria-controls="navbarNav" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="#">Home</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/listar}">Clientes</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="alert alert-success" th:if="${success!=null}" th:text="${success}"></div>
+		<div class="alert alert-danger" th:if="${error!=null}" th:text="${error}"></div>
+		<div class="alert alert-warning" th:if="${warning!=null}" th:text="${warning}"></div>
+		<div class="alert alert-info" th:if="${info!=null}" th:text="${info}"></div>
+	</header>
+
+	<div class="container"></div>
+
+	<footer th:fragment="footer" class="container">
+	<hr/>
+	<img alt="Spring logo" th:src="@{/images/Screenshot_2.png}"/>
+	<p>
+	Powered by <a href="https://spring.io/projects/spring-boot">Spring Boot</a>
+	y <a href="https://www.thymeleaf.org/">Thymeleaf</a>
+	</p>
+	<p>
+	Este proyecto fue desarrollado en el IDE STS Spring tool suit,
+	 por César Muñoz
+	</p>
+	
+	<script
+		th:src="@{/js/bootstrap.min.js}"></script>
+	<script
+		th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	
+	</footer>
+	
 </body>
 </html>
